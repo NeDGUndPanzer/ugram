@@ -1,0 +1,2 @@
+1. obtener todos los datos de un usuario en base a su user y password
+2.
