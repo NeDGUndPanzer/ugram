@@ -1,1 +1,92 @@
-/* You can add global styles to this file, and also import other style files */
+/*****************************************************************************************/
+/* CSS para navbar */
+
+.nav1{
+	top: calc(0%);
+	left: calc(0%);
+	height: 5%;
+	width: 100%;
+	padding: 0%;
+	z-index: 2;
+    position: fixed;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(194, 81, 153)), color-stop(100%,rgb(91, 42, 86)));
+}
+
+.nav1 input[type=text]{
+	width: 300px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
+
+.nav1 input[type=button]{
+	width: 230px;
+	height: 32px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #9f1085;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+    margin-left: 10px;
+}
+
+.nav1 [type=logo]{
+	width: 180px;
+	height: 70px;
+	background: transparent;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 10px;
+    margin-left: 10px;
+}
+
+.nav1 input[type=button]:hover{
+	opacity: 0.95;
+}
+
+.nav1 input[type=button]:active{
+	opacity: 0.6;
+}
+
+.nav1 input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.nav1 input[type=button]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+.imgperfil {
+    position: fixed;
+    width:70px;
+    height:75px;
+    border-radius:50px;
+    top: calc(1%);
+	right: calc(1%);
+    z-index: 2;
+    border-color:rgb(87, 5, 55);
+    border-width: 1px;
+    border-style: outset;
+}
+

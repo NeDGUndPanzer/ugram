@@ -23,11 +23,17 @@
 <div class="img1">
     <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
     <br>
-    <img class="img" [src]="cardImageBase64" />
+    <img class="imginside" [src]="cardImageBase64" />
 </div>
 
-<img class="png1" src="../../../assets/img/letrero1.png" />
-<br>
-<img class="png1" src="../../../assets/img/letrero1.png" />
 
 
+<!-- HTML para navbar -->
+<div class="nav1">
+    <img type="logo" src="../../../assets/img/logo1.JPG" alt="selfie">
+    <input type="button" value="Pagina inicial" (click)="goto_paginainicio()">
+    <input type="button" value="Editar perfil" (click)="goto_editarperfil()">
+    <input type="button" value="Pagina del onichan"> 
+</div>
+<img class="imgperfil" [src]="user.foto" (click)="goto_paginainicio()">
+<!-- ------------------------------------------------------------------ -->

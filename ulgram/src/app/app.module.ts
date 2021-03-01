@@ -8,13 +8,15 @@ import { LoginComponent } from './components/login/login.component';
 import { SingupComponent } from './components/singup/singup.component';
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 import { PaginaInicioComponent } from './components/pagina-inicio/pagina-inicio.component';
+import { EditaralbumComponent } from './components/editaralbum/editaralbum.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SingupComponent,
     EditarPerfilComponent,
-    PaginaInicioComponent
+    PaginaInicioComponent,
+    EditaralbumComponent
   ],
   imports: [
     BrowserModule,

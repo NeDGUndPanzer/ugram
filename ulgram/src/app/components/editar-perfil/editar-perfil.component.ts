@@ -28,7 +28,8 @@ export class EditarPerfilComponent implements OnInit {
 
   constructor(private router: Router) 
   { 
-    this.cardImageBase64 = this.imagedefault_.cardImageBase64;
+    this.cardImageBase64 = this.imagedefault_.cardImageBase64_riley;
+    this.user.foto = this.imagedefault_.cardImageBase64_riley;
   }
 
   ngOnInit(): void {
@@ -95,5 +96,19 @@ export class EditarPerfilComponent implements OnInit {
     */
 
   }
+
+  /**
+  * GOTOs
+  */
+
+ goto_paginainicio()
+ {
+   this.router.navigate(['/inicio']);
+ }
+
+ goto_editarperfil()
+ {
+   this.router.navigate(['/editarperfil']);
+ }
 
 }

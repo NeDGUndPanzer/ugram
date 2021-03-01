@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { base64imgdefault1 } from '../singup/base64imgdefault1';
 
 @Component({
-  selector: 'app-pagina-inicio',
-  templateUrl: './pagina-inicio.component.html',
-  styleUrls: ['./pagina-inicio.component.css']
+  selector: 'app-editaralbum',
+  templateUrl: './editaralbum.component.html',
+  styleUrls: ['./editaralbum.component.css']
 })
-export class PaginaInicioComponent implements OnInit {
+export class EditaralbumComponent implements OnInit {
 
   cardImageBase64:any = '';
   imagedefault_:base64imgdefault1 = new base64imgdefault1();
@@ -20,6 +20,8 @@ export class PaginaInicioComponent implements OnInit {
     foto: ''
   };
 
+  lista_deAlbumnes:any = { "almunes": [ "Ford", "BMW", "Fiat" ] };
+
   constructor(private router: Router) 
   { 
     // ノート：　ここに　codigo que se debe remplazar por codigo de servicios
@@ -30,7 +32,7 @@ export class PaginaInicioComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  /**
+  /*****************************************************************************
   * GOTOs
   */
 
@@ -47,7 +49,7 @@ export class PaginaInicioComponent implements OnInit {
   goto_loginl()
   {
     this.router.navigate(['/login']);
-  } 
+  }
 
   goto_editaralbum()
   {

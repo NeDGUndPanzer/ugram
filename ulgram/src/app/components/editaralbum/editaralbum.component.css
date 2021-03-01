@@ -72,8 +72,8 @@ body{
 
 .form1{
 	position: absolute;
-	top: calc(33%);
-	left: calc(58%);
+	top: calc(38%);
+	left: calc(45%);
 	height: 150px;
 	width: 350px;
 	padding: 10px;
@@ -81,7 +81,7 @@ body{
 }
 
 .form1 input[type=text]{
-	width: 300px;
+	width: 350px;
 	height: 30px;
 	background: transparent;
 	border: 1px solid rgba(255,255,255,0.6);
@@ -154,14 +154,14 @@ body{
 }
 
 
-.form2{
+.form1_labels{
 	position: absolute;
-	top: calc(35%);
-	left: calc(40%);
+	top: calc(40%);
+	left: calc(28%);
 	z-index: 2;
 }
 
-.form2 div{
+.form1_labels div{
 	float: left;
 	color: #ffffff;
 	font-family: 'Exo', sans-serif;
@@ -169,9 +169,16 @@ body{
 	font-weight: 300;
 }
 
-/* Barra de navegaciones */
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+
+.selecto{
+	width: 350px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: rgb(146, 11, 124);
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
 }
