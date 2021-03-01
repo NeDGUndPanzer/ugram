@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { base64imgdefault1 } from './base64imgdefault1';
+import { base64imgdefault1 } from '../singup/base64imgdefault1';
 import { FotografiaService } from '../../services/fotografia.service';
 
 @Component({
-  selector: 'app-singup',
-  templateUrl: './singup.component.html',
-  styleUrls: ['./singup.component.css']
+  selector: 'app-upload',
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.css']
 })
-export class SingupComponent implements OnInit {
+export class UploadComponent implements OnInit {
 
   namesToDisplay:any;
   biosToDisplay:any;
@@ -18,24 +18,43 @@ export class SingupComponent implements OnInit {
 	isImageSaved:any;
   imagedefault_:base64imgdefault1 = new base64imgdefault1();
   cardImageBase64:any = '';
+  pic: any = {
+    base64: '',
+    nombre: '',
+    album: '',
+    username: ''
+  };
 
   user: any = {
-    username: '',
-    nombre: '',
-    password: '',
-    repassword: '',
+    username: '  username',
+    nombre: '  nombre',
+    password: 'password',
+    repassword: 'repassword',
     foto: ''
   };
 
   constructor(private router: Router, private fotografiaService: FotografiaService) 
   { 
-    this.cardImageBase64 = this.imagedefault_.cardImageBase64;
+    this.pic.base64 = this.imagedefault_.cardImageBase64;
+    this.prepararHeader();
   }
 
   ngOnInit(): void {
   }
 
-  /* SOPORTE PARA CARGA DE IMAGENES */
+  prepararHeader()
+  {
+    // Cargar imagen de perfil flotante
+    let s3 = { id: "riley_1"};
+    this.fotografiaService.obtener_foto_directoS3(s3).subscribe(
+      res => {
+        console.log(res);
+        let respuesta:any = res;
+        this.user.foto = "data:image/jpeg;base64," + respuesta.mensaje;
+      },
+      error =>{ console.log(error) 
+    });
+  }
 
   fileChangeEvent(fileInput: any) 
   {
@@ -68,9 +87,8 @@ export class SingupComponent implements OnInit {
         image.onload = rs => 
         {
           const imgBase64Path = e.target.result;
-          this.cardImageBase64 = imgBase64Path;
+          this.pic.base64 = imgBase64Path;
           this.isImageSaved = true;
-          console.log(this.cardImageBase64)
         };
 		  };
 	
@@ -80,21 +98,29 @@ export class SingupComponent implements OnInit {
     return true;
 	}
 
-  /* SOPORTE PARA CREACION DE USUARIOS */
-  
-  singup()
-  {
-    this.user.foto = this.cardImageBase64;
-    let fotoaux = this.cardImageBase64;
-    let foto_ = fotoaux.replace("data:image/jpeg;base64,", "");
-    let s3 = { id: "riley_1", foto: foto_ };
-    this.fotografiaService.cargar_foto_directoS3(s3).subscribe(
-      res => {
-        console.log(res);
-      },
-      error =>{ console.log(error) 
-    });
+  /**
+  * GOTOs
+  */
 
-  }
+ goto_paginainicio()
+ {
+   this.router.navigate(['/inicio']);
+ }
+
+ goto_editarperfil()
+ {
+   this.router.navigate(['/editarperfil']);
+ }
+
+ goto_loginl()
+ {
+   this.router.navigate(['/login']);
+ } 
+
+ goto_editaralbum()
+ {
+   this.router.navigate(['/editaralbum']);
+ }
+
 
 }

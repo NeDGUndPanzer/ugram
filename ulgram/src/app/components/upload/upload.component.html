@@ -1,0 +1,31 @@
+<!-- HTML para navbar -->
+<div class="nav1">
+    <img type="logo" src="../../../assets/img/logo1.JPG" alt="selfie">
+    <input type="button" value="Pagina inicial" (click)="goto_paginainicio()">
+    <input type="button" value="Editar perfil" (click)="goto_editarperfil()">
+    <input type="button" value="Pagina del onichan"> 
+</div>
+<img class="imgperfil" [src]="user.foto" (click)="goto_paginainicio()">
+<!-- ------------------------------------------------------------------ -->
+<div class="body"></div>
+<div class="grad"></div>
+
+<div class="img1">
+    <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+    <br>
+    <img class="imginside" [src]="pic.base64" />
+</div>
+
+<div class="form1"> 
+    <input type="text" placeholder="  nombre de tu imagen" name="text1" [(ngModel)]="pic.nombre">
+    <br><br>
+    <input type="text" placeholder="  album" name="text2" [(ngModel)]="pic.album">
+    <br><br><br>
+    <input type="button" value="Cargar imagen">
+</div>
+
+<div class="form2">
+    <div>Nombre de la imagen</div>
+    <br><br>
+    <div>Album</div>
+</div>

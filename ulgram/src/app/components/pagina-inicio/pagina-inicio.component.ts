@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { base64imgdefault1 } from '../singup/base64imgdefault1';
+import { FotografiaService } from '../../services/fotografia.service';
 
 @Component({
   selector: 'app-pagina-inicio',
@@ -20,11 +21,20 @@ export class PaginaInicioComponent implements OnInit {
     foto: ''
   };
 
-  constructor(private router: Router) 
+  constructor(private router: Router, private fotografiaService: FotografiaService) 
   { 
     // ノート：　ここに　codigo que se debe remplazar por codigo de servicios
     // --> obtencion de datos de usuario
-    this.user.foto = this.imagedefault_.cardImageBase64_riley;
+    // this.user.foto = this.imagedefault_.cardImageBase64_riley;
+    let s3 = { id: "riley_1"};
+    this.fotografiaService.obtener_foto_directoS3(s3).subscribe(
+      res => {
+        console.log(res);
+        let respuesta:any = res;
+        this.user.foto = "data:image/jpeg;base64," + respuesta.mensaje;
+      },
+      error =>{ console.log(error) 
+    });
   }
 
   ngOnInit(): void {

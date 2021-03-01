@@ -9,6 +9,7 @@ import { SingupComponent } from './components/singup/singup.component';
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 import { PaginaInicioComponent } from './components/pagina-inicio/pagina-inicio.component';
 import { EditaralbumComponent } from './components/editaralbum/editaralbum.component';
+import { UploadComponent } from './components/upload/upload.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { EditaralbumComponent } from './components/editaralbum/editaralbum.compo
     SingupComponent,
     EditarPerfilComponent,
     PaginaInicioComponent,
-    EditaralbumComponent
+    EditaralbumComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
