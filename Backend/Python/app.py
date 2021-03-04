@@ -2,12 +2,16 @@ from flask import Flask, request, jsonify
 import json
 import hashlib
 import boto3
+import base64
+import uuid
 
 
 app = Flask(__name__)
 
-db = boto3.resource('dynamodb',region_name='us-east-2',aws_access_key_id='',aws_secret_access_key='')
+s3 = boto3.resource('s3',region_name='us-east-2',aws_access_key_id='AKIAQGEZTINBG6FXCMHG',aws_secret_access_key='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')
+db = boto3.resource('dynamodb',region_name='us-east-2',aws_access_key_id='AKIAVEMKH4ZBHWPR4M7A',aws_secret_access_key='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')
 userstable = db.Table('User')
+albumtable = db.Table('Albums')
 
 @app.route('/')
 def hello_world():
@@ -47,7 +51,8 @@ def registrarUsuario():
         passwd = request.json['password']
         encripted = hashlib.md5(passwd.encode())
         fullname = request.json['fullname']
-        photo = request.json['photo']
+        photo = request.json['foto']
+
         try:
             res = userstable.get_item(
             Key = {
@@ -59,17 +64,29 @@ def registrarUsuario():
             return jsonify(response)
         except KeyError:
             try:
-                res = userstable.put_item(
+                imagen = base64.b64decode(photo)
+                nombre = 'Fotos_Perfil/' + str(uuid.uuid4()) + '.jpg'
+                s3.Bucket('practica1-g21-imagenes').put_object(Key=nombre,Body=imagen, ContentType="image", ACL='public-read')
+                
+                userstable.put_item(
                 Item={
                     'username':username,
                     'password':encripted.hexdigest(),
                     'fullname':fullname,
-                    'photo':photo
+                    'photo':nombre
                 })
+
+                albumtable.put_item(
+                Item={
+                    'username':username,
+                    'albumName':'Perfil',
+                    'foto':nombre
+                })
+
                 response = {"status":'200', 'creado' : 'true'}
                 return jsonify(response)
             except:
-                response = {"status":'200', 'creado' : 'false'}
+                response = {"status":'200', 'creado' : 'false', 'msg':'Ocurrio un error'+str(Exception)}
                 return jsonify(response)
 
 @app.route('/update',methods = ['PUT'])
