@@ -10,6 +10,7 @@ import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.
 import { PaginaInicioComponent } from './components/pagina-inicio/pagina-inicio.component';
 import { EditaralbumComponent } from './components/editaralbum/editaralbum.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { CatalogoComponent } from './components/catalogo/catalogo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { UploadComponent } from './components/upload/upload.component';
     EditarPerfilComponent,
     PaginaInicioComponent,
     EditaralbumComponent,
-    UploadComponent
+    UploadComponent,
+    CatalogoComponent
   ],
   imports: [
     BrowserModule,

@@ -171,6 +171,29 @@ router.post('/iniciarSesion', async (req, res) => {
 
 });
 
+//********************************************************************** */
+// METODO: getuserdata
+// DESCRIPCION: aun no se
+router.post('/getuserdata', async (req, res) => {
+  console.log(req.body)
+
+  var params = {
+    Key: { "username": { S: req.body.username }
+    }, 
+    TableName: "User"
+  };
+  ddb.getItem(params, async(err, data) => {
+    if (err){
+      console.log(err, err.stack); 
+    }
+    else{
+      const aux = await data; 
+      res.send({'username': aux.Item.username.S, 'name': aux.Item.fullname.S, 'foto': aux.Item.photo.S});
+    }             
+  });
+
+});
+
 
 router.get('/allusers', function (req, res) {
   
@@ -203,7 +226,7 @@ router.get('/allusers', function (req, res) {
 
 
 //********************************************************************** */
-// METODO: iniciarSesion
+// METODO: registarse
 // DESCRIPCION: aun no se
 router.post('/registrar', function (req, res) {
   
@@ -252,6 +275,43 @@ router.post('/registrar', function (req, res) {
   });
 
 });
+
+//********************************************************************** */
+// METODO: update perfil
+// DESCRIPCION: ya tu sabe lady
+router.post('/update', function (req, res) {
+
+  var params = {
+    Key: { "username": { S: req.body.username }
+    }, 
+    TableName: "User"
+  };
+
+  // elimnar registro existente del usuario
+  ddb.deleteItem( params, function(err,data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    else     console.log(data);           // successful response
+  });
+
+  // crear registro
+  ddb.putItem({
+    TableName: "User",
+    Item: {
+      "username": { S: req.body.username },
+      "password": { S: md5(req.body.password) },
+      "fullname": { S: req.body.nombre },
+      "photo": { S: req.body.foto }
+    }
+  }, function (err, data) {
+    if (err) {
+      res.send({ 'message': 'ddb failed' });
+    } else {
+      res.send({ 'message': 'ddb success' });
+    }
+  });
+
+});
+
 
 
 //-------------------------------------------------- INCIO AREA DE PRUEBAS

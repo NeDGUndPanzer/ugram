@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { base64imgdefault1 } from '../singup/base64imgdefault1';
+import { FotografiaService } from '../../services/fotografia.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -26,13 +28,31 @@ export class EditarPerfilComponent implements OnInit {
     foto: ''
   };
 
-  constructor(private router: Router) 
+  constructor(private router: Router, private fotografiaService: FotografiaService, private authService: AuthService)
   { 
-    this.cardImageBase64 = this.imagedefault_.cardImageBase64_riley;
-    this.user.foto = this.imagedefault_.cardImageBase64_riley;
+    //this.cardImageBase64 = this.imagedefault_.cardImageBase64_riley;
+    //this.user.foto = this.imagedefault_.cardImageBase64_riley;
+    this.getSesionVariables();
   }
 
   ngOnInit(): void {
+  }
+
+  getSesionVariables()
+  {
+    let sesion:any = JSON.parse(localStorage.getItem("currentUser") || '{}');
+    console.log(sesion.username);
+    this.user.username = sesion.username;
+    this.user.password = sesion.password;
+    this.authService.getuserData(this.user).subscribe(
+      res => {
+        console.log(res);
+        let respuesta:any = res;
+        this.user.foto = respuesta.foto;
+        this.user.nombre = respuesta.name;
+      },
+      error =>{ console.log(error) 
+    });
   }
 
   /* SOPORTE PARA CARGA DE IMAGENES */
@@ -70,7 +90,7 @@ export class EditarPerfilComponent implements OnInit {
           const imgBase64Path = e.target.result;
           this.cardImageBase64 = imgBase64Path;
           this.isImageSaved = true;
-          console.log(this.cardImageBase64)
+          //console.log(this.cardImageBase64)
         };
 		  };
 	
@@ -82,18 +102,47 @@ export class EditarPerfilComponent implements OnInit {
 
   /* SOPORTE PARA CREACION DE USUARIOS */
   
-  singup()
+  editar()
   {
     this.user.foto = this.cardImageBase64;
     console.log(this.user);
 
     /*****************************************************
-     * Validacion de que usuario no exista
+     * subir imagen
     */
 
+   let fotoaux = this.cardImageBase64;
+   let foto_ = fotoaux.replace("data:image/jpeg;base64,", "");
+   
+   // primer paso: subir foto a S3
+   let fotografia = { foto: foto_ };
+   this.fotografiaService.service_upload_singup(fotografia).subscribe(
+     res => {
+       console.log(res);
+       const foto_aux:any = res;
+       let foto_aux_:any = 'https://practica1-g21-imagenes.s3.us-east-2.amazonaws.com/Fotos_Perfil/';
+       foto_aux_ = foto_aux_ + foto_aux.idfoto + '.jpg';
+       console.log(foto_aux_)
+       this.user.foto = foto_aux_;
+       console.log(this.user)
+     },
+     error =>{ console.log(error) 
+   });
+
     /*****************************************************
-     * Creacion de usuario
+     * modificar
     */
+
+    console.log('Antes de update:')
+    console.log(this.user)
+   this.authService.updateUser(this.user).subscribe(
+    res => {
+      console.log(res);
+    },
+    error =>{ console.log(error) 
+    });
+
+
 
   }
 

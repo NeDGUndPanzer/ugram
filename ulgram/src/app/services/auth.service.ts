@@ -19,4 +19,15 @@ export class AuthService {
     return this.http.post(ip + 'registrar', foto_data); 
   }
 
+  getuserData(foto_data: any)
+  {
+    return this.http.post(ip + 'getuserdata', foto_data); 
+  }
+
+  updateUser(data: any)
+  {
+    return this.http.post(ip + 'update', data); 
+  }
+
+
 }
