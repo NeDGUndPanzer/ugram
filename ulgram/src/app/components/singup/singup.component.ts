@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { base64imgdefault1 } from './base64imgdefault1';
 import { FotografiaService } from '../../services/fotografia.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-singup',
@@ -27,7 +28,7 @@ export class SingupComponent implements OnInit {
     foto: ''
   };
 
-  constructor(private router: Router, private fotografiaService: FotografiaService) 
+  constructor(private router: Router, private fotografiaService: FotografiaService, private authService: AuthService) 
   { 
     this.cardImageBase64 = this.imagedefault_.cardImageBase64;
   }
@@ -70,7 +71,7 @@ export class SingupComponent implements OnInit {
           const imgBase64Path = e.target.result;
           this.cardImageBase64 = imgBase64Path;
           this.isImageSaved = true;
-          console.log(this.cardImageBase64)
+          //console.log(this.cardImageBase64)
         };
 		  };
 	
@@ -84,16 +85,34 @@ export class SingupComponent implements OnInit {
   
   singup()
   {
-    this.user.foto = this.cardImageBase64;
     let fotoaux = this.cardImageBase64;
     let foto_ = fotoaux.replace("data:image/jpeg;base64,", "");
-    let s3 = { id: "riley_1", foto: foto_ };
-    this.fotografiaService.cargar_foto_directoS3(s3).subscribe(
+    
+    // primer paso: subir foto a S3
+    let fotografia = { foto: foto_ };
+    this.fotografiaService.service_upload_singup(fotografia).subscribe(
+      res => {
+        console.log(res);
+        const foto_aux:any = res;
+        let foto_aux_:any = 'https://practica1-g21-imagenes.s3.us-east-2.amazonaws.com/Fotos_Perfil/';
+        foto_aux_ = foto_aux_ + foto_aux.idfoto + '.jpg';
+        this.user.foto = foto_aux_;
+        console.log(this.user)
+
+        
+
+      },
+      error =>{ console.log(error) 
+    });
+
+    // segund pado: subir a dynamo
+    this.authService.registrar(this.user).subscribe(
       res => {
         console.log(res);
       },
       error =>{ console.log(error) 
     });
+
 
   }
 

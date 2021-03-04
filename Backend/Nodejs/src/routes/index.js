@@ -4,6 +4,7 @@ const router = Router();
 const cors = require('cors');
 var bodyParser = require('body-parser');
 const uuidv4 = require('uuid-random');
+var md5 = require('md5');
 
 var corsOptions = { origin: true, optionsSuccessStatus: 200 };
 router.use(cors(corsOptions));
@@ -16,9 +17,8 @@ var AWS = require('aws-sdk');
 const aws_keys = require('./creds');
 
 const s3 = new AWS.S3(aws_keys.s3);
-//const ddb = new AWS.DynamoDB(aws_keys.dynamodb);
+const ddb = new AWS.DynamoDB(aws_keys.dynamodb);
 //const rek = new AWS.Rekognition(aws_keys.rekognition);
-
 
 router.get('/hola', 
     (req,res) => res.json
@@ -124,8 +124,99 @@ router.post('/download_profilephoto', function (req, res) {
   });
 });
 
-//--------------------------------------------------ALMACENAMIENTO---------------------------------------
 
+/**
+ * DYANAMO 
+ */
+
+const config = require('./db_creds.js');
+
+
+//********************************************************************** */
+// METODO: iniciarSesion
+// DESCRIPCION: aun no se
+router.get('/iniciarSesion', function (req, res) {
+  
+  AWS.config.update(config.aws_remote_config);
+
+  const docClient = new AWS.DynamoDB.DocumentClient();
+
+  const params = {
+      TableName: config.aws_table_name
+  };
+
+  docClient.scan(params, function (err, data) {
+
+      if (err) {
+          console.log(err)
+          res.send({
+              success: false,
+              message: err
+          });
+      } else {
+          const { Items } = data;
+          res.send({
+              success: true,
+              movies: Items
+          });
+      }
+  });
+  
+});
+
+//********************************************************************** */
+// METODO: iniciarSesion
+// DESCRIPCION: aun no se
+router.post('/registrar', function (req, res) {
+  
+  AWS.config.update(config.aws_remote_config);
+
+  const docClient = new AWS.DynamoDB.DocumentClient();
+
+  // Ver si existe o que pedo
+  let userExist = false;
+  var params = {
+    Key: { "username": { S: req.body.username }
+    }, 
+    TableName: "User"
+  };
+  ddb.getItem(params, function(err, data) {
+    if (err){
+      console.log(err, err.stack); 
+    }
+    else{
+      const dataaux = data;
+      if(JSON.stringify(dataaux) == "{}"){
+        
+        console.log('user no existe')
+        ddb.putItem({
+          TableName: "User",
+          Item: {
+            "username": { S: req.body.username },
+            "password": { S: md5(req.body.password) },
+            "fullname": { S: req.body.nombre },
+            "photo": { S: req.body.foto }
+          }
+        }, function (err, data) {
+          if (err) {
+            res.send({ 'message': 'ddb failed' });
+          } else {
+            res.send({ 'message': 'ddb success' });
+          }
+        });
+        
+      }
+      else{
+        console.log('user existe')
+        res.send({ 'message': 'usuario existe' });
+      }
+    }             
+  });
+
+});
+
+
+//-------------------------------------------------- INCIO AREA DE PRUEBAS
 //subir foto en s3
 router.post('/subirfoto_solos3', function (req, res) {
 
@@ -165,7 +256,7 @@ router.post('/obtenerfoto_solos3', function (req, res) {
   });
 
 });
-  
+//-------------------------------------------------- FIN AREA DE PRUEBAS
   
 
 module.exports = router;
