@@ -19,4 +19,9 @@ export class FotografiaService {
     return this.http.post(ip + 'obtenerfoto_solos3', foto_data);  
   }
 
+  service_upload_singup(foto_data: any)
+  {
+    return this.http.post(ip + 'upload_singup', foto_data);  
+  }
+
 }

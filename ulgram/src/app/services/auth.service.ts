@@ -14,4 +14,9 @@ export class AuthService {
     return this.http.post(ip + 'users/login', usuario);  
   }
 
+  registrar(foto_data: any)
+  {
+    return this.http.post(ip + 'registrar', foto_data); 
+  }
+
 }
