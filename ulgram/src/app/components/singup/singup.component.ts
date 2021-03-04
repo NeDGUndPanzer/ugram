@@ -96,6 +96,7 @@ export class SingupComponent implements OnInit {
         const foto_aux:any = res;
         let foto_aux_:any = 'https://practica1-g21-imagenes.s3.us-east-2.amazonaws.com/Fotos_Perfil/';
         foto_aux_ = foto_aux_ + foto_aux.idfoto + '.jpg';
+        console.log(foto_aux_)
         this.user.foto = foto_aux_;
         console.log(this.user)
 

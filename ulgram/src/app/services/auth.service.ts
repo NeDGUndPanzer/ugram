@@ -11,7 +11,7 @@ export class AuthService {
 
   login(usuario: any)
   {
-    return this.http.post(ip + 'users/login', usuario);  
+    return this.http.post(ip + 'iniciarSesion', usuario);  
   }
 
   registrar(foto_data: any)

@@ -8,9 +8,9 @@
     <img src="../../../assets/img/selfie.jpeg" alt="selfie">
 </div>
 <div class="login">
-        <input type="text" placeholder="  usuario" name="user" [(ngModel)]="user.email"><br>
+        <input type="text" placeholder="  usuario" name="user" [(ngModel)]="user.username"><br>
         <input type="password" placeholder="  password" name="password" [(ngModel)]="user.password"><br>
-        <input type="button" value="入ってください">
+        <input type="button" value="入ってください" (click) = "logear()">
 </div>
 
 

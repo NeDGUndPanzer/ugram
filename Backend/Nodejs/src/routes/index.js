@@ -135,7 +135,44 @@ const config = require('./db_creds.js');
 //********************************************************************** */
 // METODO: iniciarSesion
 // DESCRIPCION: aun no se
-router.get('/iniciarSesion', function (req, res) {
+router.post('/iniciarSesion', async (req, res) => {
+  
+  var params = {
+    Key: { "username": { S: req.body.username }
+    }, 
+    TableName: "User"
+  };
+  ddb.getItem(params, async(err, data) =>{
+    if (err){
+      console.log(err, err.stack); 
+    }
+    else{
+      const dataaux = data;
+      if(JSON.stringify(dataaux) == "{}"){
+        console.log('user no existe')
+        res.send({ 'login': 'false' });
+      }
+      else{
+        console.log('user existe');
+        const aux = await data;
+        console.log(md5(req.body.password))
+        console.log(aux.Item.password.S)
+        if(aux.Item.password.S == md5(req.body.password))
+        {
+          res.send({ 'login': 'true' });
+        }
+        else
+        {
+          res.send({ 'login': 'Contrasena incorrecta' });
+        }
+      }
+    }             
+  });
+
+});
+
+
+router.get('/allusers', function (req, res) {
   
   AWS.config.update(config.aws_remote_config);
 
@@ -163,6 +200,7 @@ router.get('/iniciarSesion', function (req, res) {
   });
   
 });
+
 
 //********************************************************************** */
 // METODO: iniciarSesion
