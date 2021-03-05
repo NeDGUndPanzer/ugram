@@ -68,13 +68,12 @@ def registrarUsuario():
             return jsonify(response)
         except KeyError:
             try:
-                nombre = subirImagen(photo)
                 userstable.put_item(
                 Item={
                     'username':username,
                     'password':encripted.hexdigest(),
                     'fullname':fullname,
-                    'photo':urlbucket+nombre
+                    'photo':photo
                 })
 
                 albumtable.put_item(
@@ -87,7 +86,7 @@ def registrarUsuario():
                 Item={
                     'username':username,
                     'albumName':'Perfil',
-                    'imgurl': urlbucket+nombre
+                    'imgurl': photo
                 })
                 response = {"status":'200', 'creado' : 'true'}
                 return jsonify(response)
@@ -200,12 +199,11 @@ def addFoto():
         albumname = request.json['albumName'] 
         foto = request.json['foto']
         try:
-            nombre = subirImagen(foto)
             fotostable.put_item(
             Item={
                 'username':username,
                 'albumName':albumname,
-                'imgurl' : urlbucket+nombre
+                'imgurl' : foto
             })
             response = {"status":'200', 'agregado' : 'true'}
             return jsonify(response)
@@ -255,6 +253,12 @@ def deleteAlbum():
         except:
             response = {"status":'200', 'eliminado' : 'false', 'msg':'Ocurrio un error'}
             return jsonify(response)
+
+
+@app.route('/subirFoto',methods = ['DELETE'])
+def subirFoto():
+    return subirImagen(request.json['foto'])
+
 
 def subirImagen(photo):
     imagen = base64.b64decode(photo)
