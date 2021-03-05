@@ -307,7 +307,7 @@ def getuserfotos():
                 datos +='"}'
                 return json.loads(datos)
         except:
-            response = {"status":'200', 'eliminado' : 'false', 'msg':'Ocurrio un error'}
+            response = {"fotos" : 'bokunopico'}
             return jsonify(response)
 def subirImagen(photo):
     imagen = base64.b64decode(photo)
