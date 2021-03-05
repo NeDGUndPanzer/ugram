@@ -19,7 +19,8 @@ export class EditaralbumComponent implements OnInit {
     nombre: '  nombre',
     password: 'password',
     repassword: 'repassword',
-    foto: ''
+    foto: '',
+    albumname: ''
   };
 
   lista_deAlbumnes:any = { "almunes": [ "Ford", "BMW", "Fiat" ] };
@@ -30,6 +31,7 @@ export class EditaralbumComponent implements OnInit {
     // --> obtencion de datos de usuario
     //this.user.foto = this.imagedefault_.cardImageBase64_riley;
     this.getSesionVariables();
+    this.getuseralbums();
   }
 
   ngOnInit(): void {
@@ -50,6 +52,43 @@ export class EditaralbumComponent implements OnInit {
       error =>{ console.log(error) 
     });
   }
+
+  crearAlbum()
+  {
+    console.log(this.user)
+    this.fotografiaService.service_addAlbum(this.user).subscribe(
+      res => {
+        console.log(res);
+      },
+      error =>{ console.log(error) 
+    });
+  }
+
+  public albunes:any;
+  public albunes_aux:any;
+  getuseralbums()
+  {
+    //console.log(this.user.username)
+    this.fotografiaService.service_getuseralbums(this.user).subscribe(
+      res => {
+        console.log(res);
+        let miarray:Array<any> = []; 
+        const aux:any = res;
+        this.albunes_aux = aux.albumnes.toString();
+        let cadenaux:any = this.albunes_aux.split(";");
+        for (let index = 0; index < cadenaux.length; index++) {
+          const element = cadenaux[index];
+          console.log(element)
+          miarray.push(element);
+        }
+        miarray.pop();
+        console.log(miarray)
+        this.albunes = miarray;
+      },
+      error =>{ console.log(error) 
+    });
+  }
+
   
   /*****************************************************************************
   * GOTOs

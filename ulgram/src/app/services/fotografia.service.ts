@@ -24,4 +24,24 @@ export class FotografiaService {
     return this.http.post(ip + 'upload_singup', foto_data);  
   }
 
+  service_addAlbum(foto_data: any)
+  {
+    return this.http.post(ip + 'addAlbum', foto_data);  
+  }
+
+  service_upload_pic(foto_data: any)
+  {
+    return this.http.post(ip + 'upload_pic', foto_data);  
+  }
+  
+  service_getuseralbums(foto_data: any)
+  {
+    return this.http.post(ip + 'getuseralbums', foto_data);  
+  }
+
+  service_addFoto(foto_data: any)
+  {
+    return this.http.post(ip + 'addFoto', foto_data);  
+  }
+
 }
