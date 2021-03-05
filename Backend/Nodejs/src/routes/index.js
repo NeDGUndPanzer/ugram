@@ -88,7 +88,7 @@ router.post('/upload_pic', function (req, res) {
 
   /** Codigo para S3 ---> */
   var foto = req.body.foto;
-  var nombrei = "Fotos_Perfil/" + id + ".jpg";
+  var nombrei = "Fotos_Publicadas/" + id + ".jpg";
   let buff = new Buffer.from(foto, 'base64');
 
   const params = {
@@ -312,6 +312,101 @@ router.post('/update', function (req, res) {
 
 });
 
+//********************************************************************** */
+//********************************************************************** */
+//********************************************************************** */
+// AREA DE ALBUMS
+//********************************************************************** */
+//********************************************************************** */
+//********************************************************************** */
+
+
+//********************************************************************** */
+// METODO: getuseralbums
+// DESCRIPCION: no se
+// ESTADO: DONE
+router.post('/getuseralbums', async (req, res) => {
+
+  var params = {
+    ExpressionAttributeValues: {
+      ":v1": {
+        S: req.body.username
+       }
+     },
+    KeyConditionExpression: "username = :v1",
+    TableName: "Albums"
+  };
+  ddb.query(params, async (err, data) => {
+    if (err){
+      console.log(err, err.stack); 
+    }
+    else{
+      datos = '';
+      data.Items.forEach(element => {
+        datos += element.albumName.S + ';';
+      });
+      res.send({ 'albumnes': datos });
+    }             
+  });
+
+});
+
+//********************************************************************** */
+// METODO: addAlbum
+// DESCRIPCION: no se
+// ESTADO: DONE
+router.post('/addAlbum', function (req, res) {
+  ddb.putItem({
+    TableName: "Albums",
+    Item: {
+      "username": { S: req.body.username },
+      "albumName": { S: req.body.albumname }
+    }
+  }, function (err, data) {
+    if (err) {
+      res.send({ 'agregado': 'false' });
+    } else {
+      res.send({ 'agregado': 'true' });
+    }
+  });
+});
+
+//********************************************************************** */
+// METODO: addFoto
+// DESCRIPCION: no se
+// ESTADO: DONE
+router.post('/addFoto', function (req, res) {
+  console.log(req.body)
+  ddb.putItem({
+    TableName: "Fotos",
+    Item: {
+      "username": { S: req.body.username },
+      "albumName": { S: req.body.albumname },
+      "imgurl": { S: req.body.imgurl },
+      "picname": { S: req.body.picname }
+    }
+  }, function (err, data) {
+    if (err) {
+      res.send({ 'agregado': 'false' });
+    } else {
+      res.send({ 'agregado': 'true' });
+    }
+  });
+});
+
+//********************************************************************** */
+// METODO: deleteFoto
+// DESCRIPCION: no se
+router.post('/deleteFoto', function (req, res) {
+
+});
+
+//********************************************************************** */
+// METODO: deleteAlbum
+// DESCRIPCION: no se
+router.post('/deleteAlbum', function (req, res) {
+
+});
 
 
 //-------------------------------------------------- INCIO AREA DE PRUEBAS

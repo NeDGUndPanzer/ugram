@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { base64imgdefault1 } from '../singup/base64imgdefault1';
 import { FotografiaService } from '../../services/fotografia.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-upload',
@@ -33,10 +34,11 @@ export class UploadComponent implements OnInit {
     foto: ''
   };
 
-  constructor(private router: Router, private fotografiaService: FotografiaService) 
+  constructor(private router: Router, private fotografiaService: FotografiaService, private authService: AuthService) 
   { 
     this.pic.base64 = this.imagedefault_.cardImageBase64;
-    this.prepararHeader();
+    //this.prepararHeader();
+    this.getSesionVariables();
   }
 
   ngOnInit(): void {
@@ -51,6 +53,22 @@ export class UploadComponent implements OnInit {
         console.log(res);
         let respuesta:any = res;
         this.user.foto = "data:image/jpeg;base64," + respuesta.mensaje;
+      },
+      error =>{ console.log(error) 
+    });
+  }
+
+  getSesionVariables()
+  {
+    let sesion:any = JSON.parse(localStorage.getItem("currentUser") || '{}');
+    console.log(sesion.username);
+    this.user.username = sesion.username;
+    this.authService.getuserData(this.user).subscribe(
+      res => {
+        console.log(res);
+        let respuesta:any = res;
+        this.user.foto = respuesta.foto;
+        this.user.nombre = respuesta.name;
       },
       error =>{ console.log(error) 
     });
@@ -87,7 +105,7 @@ export class UploadComponent implements OnInit {
         image.onload = rs => 
         {
           const imgBase64Path = e.target.result;
-          this.pic.base64 = imgBase64Path;
+          this.cardImageBase64 = imgBase64Path;
           this.isImageSaved = true;
         };
 		  };
@@ -97,6 +115,42 @@ export class UploadComponent implements OnInit {
 
     return true;
 	}
+
+  picfoto: any = {
+    username: '',
+    albumname: '',
+    imgurl: '',
+    picname:''
+  }; //mcalbum1
+  subirFoto()
+  {
+    let fotoaux = this.cardImageBase64;
+    let foto_ = fotoaux.replace("data:image/jpeg;base64,", "");
+    let fotografia = { foto: foto_ };
+    console.log(fotografia)
+    this.fotografiaService.service_upload_pic(fotografia).subscribe(
+      res => {
+        const foto_aux:any = res;
+        let foto_aux_:any = 'https://practica1-g21-imagenes.s3.us-east-2.amazonaws.com/Fotos_Publicadas/';
+        foto_aux_ = foto_aux_ + foto_aux.idfoto + '.jpg';
+        this.picfoto.imgurl = foto_aux_;
+      },
+      error =>{ console.log(error) 
+    });
+    this.picfoto.username = this.user.username;
+    if(this.picfoto.imgurl == ''){
+
+    }
+    else{
+      alert('Procesando imagen');
+      this.fotografiaService.service_addFoto(this.picfoto).subscribe(
+        res => {
+          console.log(res)
+        },
+        error =>{ console.log(error) 
+      });
+    }
+  }
 
   /**
   * GOTOs
