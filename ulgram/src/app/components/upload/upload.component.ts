@@ -152,7 +152,7 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  /**
+   /**
   * GOTOs
   */
 
@@ -174,6 +174,16 @@ export class UploadComponent implements OnInit {
  goto_editaralbum()
  {
    this.router.navigate(['/editaralbum']);
+ }
+
+ goto_Catalogo()
+ {
+   this.router.navigate(['/catologo']);
+ }
+
+ goto_upload()
+ {
+   this.router.navigate(['/upload']);
  }
 
 

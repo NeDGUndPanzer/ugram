@@ -160,4 +160,24 @@ export class EditarPerfilComponent implements OnInit {
    this.router.navigate(['/editarperfil']);
  }
 
+ goto_loginl()
+ {
+   this.router.navigate(['/login']);
+ } 
+
+ goto_editaralbum()
+ {
+   this.router.navigate(['/editaralbum']);
+ }
+
+ goto_Catalogo()
+ {
+   this.router.navigate(['/catologo']);
+ }
+
+ goto_upload()
+ {
+   this.router.navigate(['/upload']);
+ }
+
 }

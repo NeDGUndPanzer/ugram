@@ -37,5 +37,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  goto_singup()
+ {
+   this.router.navigate(['/singup']);
+ }
+
 
 }

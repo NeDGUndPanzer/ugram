@@ -28,8 +28,10 @@
 <div class="nav1">
     <img type="logo" src="../../../assets/img/logo1.JPG" alt="selfie">
     <input type="button" value="Pagina inicial" (click)="goto_paginainicio()">
-    <input type="button" value="Editar perfil" (click)="goto_editarperfil()">
-    <input type="button" value="Pagina del onichan"> 
+    <input type="button" value="Control perfil" (click)="goto_editarperfil()">
+    <input type="button" value="Catalogo" (click)="goto_Catalogo()"> 
+    <input type="button" value="Manejo de album" (click)="goto_editaralbum()"> 
+    <input type="button" value="Subir foto" (click)="goto_upload()"> 
 </div>
 <img class="imgperfil" [src]="user.foto" (click)="goto_paginainicio()">
 <!-- ------------------------------------------------------------------ -->

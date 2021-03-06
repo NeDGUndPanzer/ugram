@@ -106,13 +106,21 @@ export class SingupComponent implements OnInit {
       error =>{ console.log(error) 
     });
 
+
+    if(this.user.foto == ''){
+
+    }
+    else{
+      alert('usuario creado')
+      this.authService.registrar(this.user).subscribe(
+        res => {
+          console.log(res);
+        },
+        error =>{ console.log(error) 
+      });
+    }
     // segund pado: subir a dynamo
-    this.authService.registrar(this.user).subscribe(
-      res => {
-        console.log(res);
-      },
-      error =>{ console.log(error) 
-    });
+    
 
 
   }

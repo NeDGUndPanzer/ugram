@@ -1,1 +1,31 @@
-<p>catalogo works!</p>
+<!-- HTML para navbar -->
+<div class="nav1">
+    <img type="logo" src="../../../assets/img/logo1.JPG" alt="selfie">
+    <input type="button" value="Pagina inicial" (click)="goto_paginainicio()">
+    <input type="button" value="Control perfil" (click)="goto_editarperfil()">
+    <input type="button" value="Catalogo" (click)="goto_Catalogo()"> 
+    <input type="button" value="Manejo de album" (click)="goto_editaralbum()"> 
+    <input type="button" value="Subir foto" (click)="goto_upload()"> 
+</div>
+<img class="imgperfil" [src]="user.foto" (click)="goto_paginainicio()">
+<!-- ------------------------------------------------------------------ -->
+
+<br><br><br><br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Album</th>
+            <th scope="col">foto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of this.catalogo">
+            <td> {{item.album}} </td>
+            <td align="center">  
+                <div>
+                    <img class="gato" src="{{item.foto}}" />
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

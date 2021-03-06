@@ -343,7 +343,7 @@ router.post('/getuseralbums', async (req, res) => {
     else{
       datos = '';
       data.Items.forEach(element => {
-        datos += element.albumName.S + ';';
+        datos += element.albumName.S + 'bokunopico';
       });
       res.send({ 'albumnes': datos });
     }             
@@ -405,6 +405,39 @@ router.post('/deleteFoto', function (req, res) {
 // METODO: deleteAlbum
 // DESCRIPCION: no se
 router.post('/deleteAlbum', function (req, res) {
+
+});
+
+
+//********************************************************************** */
+// METODO: getFotosAlbum
+// DESCRIPCION: no se
+router.post('/getFotosAlbum', function (req, res) {
+
+  var params = {
+    ExpressionAttributeValues: {
+      ":v1": {
+        S: req.body.username
+       },
+      ":v2": {
+        S: req.body.album
+       }
+     },
+    FilterExpression: "username = :v1 AND albumName = :v2",
+    TableName: "Fotos"
+  };
+  ddb.scan(params, async (err, data) => {
+    if (err){
+      console.log(err, err.stack); 
+    }
+    else{
+      datos = '';
+      data.Items.forEach(element => {
+        datos += element.imgurl.S + 'bokunopico';
+      });
+      res.send({ 'fotos': datos });
+    }             
+  });
 
 });
 

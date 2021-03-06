@@ -75,7 +75,7 @@ export class EditaralbumComponent implements OnInit {
         let miarray:Array<any> = []; 
         const aux:any = res;
         this.albunes_aux = aux.albumnes.toString();
-        let cadenaux:any = this.albunes_aux.split(";");
+        let cadenaux:any = this.albunes_aux.split("bokunopico");
         for (let index = 0; index < cadenaux.length; index++) {
           const element = cadenaux[index];
           console.log(element)
@@ -90,28 +90,38 @@ export class EditaralbumComponent implements OnInit {
   }
 
   
-  /*****************************************************************************
+   /**
   * GOTOs
   */
 
-  goto_paginainicio()
-  {
-    this.router.navigate(['/inicio']);
-  }
+ goto_paginainicio()
+ {
+   this.router.navigate(['/inicio']);
+ }
 
-  goto_editarperfil()
-  {
-    this.router.navigate(['/editarperfil']);
-  }
+ goto_editarperfil()
+ {
+   this.router.navigate(['/editarperfil']);
+ }
 
-  goto_loginl()
-  {
-    this.router.navigate(['/login']);
-  }
+ goto_loginl()
+ {
+   this.router.navigate(['/login']);
+ } 
 
-  goto_editaralbum()
-  {
-    this.router.navigate(['/editaralbum']);
-  }
+ goto_editaralbum()
+ {
+   this.router.navigate(['/editaralbum']);
+ }
+
+ goto_Catalogo()
+ {
+   this.router.navigate(['/catologo']);
+ }
+
+ goto_upload()
+ {
+   this.router.navigate(['/upload']);
+ }
 
 }

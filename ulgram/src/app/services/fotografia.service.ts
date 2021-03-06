@@ -44,4 +44,10 @@ export class FotografiaService {
     return this.http.post(ip + 'addFoto', foto_data);  
   }
 
+  service_getFotosAlbum(foto_data: any)
+  {
+    return this.http.post(ip + 'getFotosAlbum', foto_data);  
+  }
+  
+
 }

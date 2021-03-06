@@ -61,28 +61,38 @@ export class PaginaInicioComponent implements OnInit {
     });
   }
 
-  /**
+   /**
   * GOTOs
   */
 
-  goto_paginainicio()
-  {
-    this.router.navigate(['/inicio']);
-  }
+ goto_paginainicio()
+ {
+   this.router.navigate(['/inicio']);
+ }
 
-  goto_editarperfil()
-  {
-    this.router.navigate(['/editarperfil']);
-  }
+ goto_editarperfil()
+ {
+   this.router.navigate(['/editarperfil']);
+ }
 
-  goto_loginl()
-  {
-    this.router.navigate(['/login']);
-  } 
+ goto_loginl()
+ {
+   this.router.navigate(['/login']);
+ } 
 
-  goto_editaralbum()
-  {
-    this.router.navigate(['/editaralbum']);
-  }
+ goto_editaralbum()
+ {
+   this.router.navigate(['/editaralbum']);
+ }
+
+ goto_Catalogo()
+ {
+   this.router.navigate(['/catologo']);
+ }
+
+ goto_upload()
+ {
+   this.router.navigate(['/upload']);
+ }
 
 }

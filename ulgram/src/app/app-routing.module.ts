@@ -6,6 +6,7 @@ import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.
 import { PaginaInicioComponent } from './components/pagina-inicio/pagina-inicio.component';
 import { EditaralbumComponent } from './components/editaralbum/editaralbum.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'editarperfil', component: EditarPerfilComponent},
   {path: 'inicio', component: PaginaInicioComponent},
   {path: 'editaralbum', component: EditaralbumComponent},
-  {path: 'upload', component: UploadComponent}
+  {path: 'upload', component: UploadComponent},
+  {path: 'catologo', component: CatalogoComponent}
 ];
 
 @NgModule({

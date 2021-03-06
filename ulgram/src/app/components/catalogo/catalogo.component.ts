@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { base64imgdefault1 } from '../singup/base64imgdefault1';
 import { FotografiaService } from '../../services/fotografia.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -12,30 +13,117 @@ import { FotografiaService } from '../../services/fotografia.service';
 export class CatalogoComponent implements OnInit {
 
   user: any = {
-    username: '  username',
-    nombre: '  nombre',
-    password: 'password',
-    repassword: 'repassword',
+    username: '',
+    nombre: '',
+    password: '',
+    repassword: '',
     foto: ''
   };
 
-  constructor(private router: Router, private fotografiaService: FotografiaService) 
+  constructor(private router: Router, private fotografiaService: FotografiaService, private authService: AuthService)  
   { 
-    // ノート：　ここに　codigo que se debe remplazar por codigo de servicios
-    // --> obtencion de datos de usuario
-    // this.user.foto = this.imagedefault_.cardImageBase64_riley;
-    let s3 = { id: "riley_1"};
-    this.fotografiaService.obtener_foto_directoS3(s3).subscribe(
+    //this.getmclovin();
+    this.getSesionVariables();
+
+    this.getuseralbums();
+    
+  }
+
+  ngOnInit(): void {
+  }
+
+  getSesionVariables()
+  {
+    let sesion:any = JSON.parse(localStorage.getItem("currentUser") || '{}');
+    console.log(sesion.username);
+    this.user.username = sesion.username;
+    this.authService.getuserData(this.user).subscribe(
       res => {
         console.log(res);
         let respuesta:any = res;
-        this.user.foto = "data:image/jpeg;base64," + respuesta.mensaje;
+        this.user.foto = respuesta.foto;
+        this.user.nombre = respuesta.name;
       },
       error =>{ console.log(error) 
     });
   }
 
-  ngOnInit(): void {
+  getmclovin()
+  {
+    let s3 = { username: "mclove", album: "mcalbum1"};
+    console.log(s3)
+    this.fotografiaService.service_getFotosAlbum(s3).subscribe(
+      res => {
+        console.log(res);
+      },
+      error =>{ console.log(error) 
+    });
+  }
+
+  /**
+   *  Algortimo para mostrar el catologo 
+   *  01. tener listo el username
+   *  02. obtener todos los albumnes a partir del username
+   *  03. recorrer los almbunes haceidno match con el username
+  */
+  
+  public catalogo:any = [];
+  showCatalog()
+  {
+    /* 01. tener listo el username */
+    console.log("username -> " + this.user.username);
+
+    /* 02. obtener todos los albumnes a partir del username */
+    console.log("albunes -> " + this.albunes);
+
+    /* 03. recorrer los almbunes haceidno match con el username */
+    for (let i = 0; i < this.albunes.length; i++) 
+    {
+      const element = this.albunes[i];
+      const albumaux = element;
+      let s3 = { username: this.user.username, album: element}
+      this.fotografiaService.service_getFotosAlbum(s3).subscribe(
+        res => {
+            let miarray:Array<any> = []; 
+            const aux:any = res;
+            this.albunes_aux = aux.fotos.toString();
+            let cadenaux:any = this.albunes_aux.split("bokunopico");
+            for (let index = 0; index < cadenaux.length; index++) {
+              const element = cadenaux[index];
+              miarray.push(element);
+              let foto:any = { album:  albumaux, foto: element};
+              this.catalogo.push(foto);
+            }
+            this.catalogo.pop();
+        },
+        error =>{ console.log(error) 
+      }); 
+    }
+
+    console.log(this.catalogo)
+
+  }
+
+  public albunes:any;
+  public albunes_aux:any;
+  public getuseralbums()
+  {
+    this.fotografiaService.service_getuseralbums(this.user).subscribe(
+      res => {
+        let miarray:Array<any> = []; 
+        const aux:any = res;
+        this.albunes_aux = aux.albumnes.toString();
+        let cadenaux:any = this.albunes_aux.split("bokunopico");
+        for (let index = 0; index < cadenaux.length; index++) {
+          const element = cadenaux[index];
+          miarray.push(element);
+        }
+        miarray.pop();
+        this.albunes = miarray;
+        this.showCatalog();
+      },
+      error =>{ console.log(error) 
+    });
   }
 
   /**
@@ -61,5 +149,16 @@ export class CatalogoComponent implements OnInit {
  {
    this.router.navigate(['/editaralbum']);
  }
+
+ goto_Catalogo()
+ {
+   this.router.navigate(['/catologo']);
+ }
+
+ goto_upload()
+ {
+   this.router.navigate(['/upload']);
+ }
+ 
 
 }

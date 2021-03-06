@@ -1,0 +1,208 @@
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-size: cover;
+	z-index: -1;
+}
+
+.grad{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(194, 81, 153)), color-stop(100%,rgb(91, 42, 86)));
+	z-index: 1;
+	opacity: 0.7;
+}
+
+.gato {
+    width: 200px;
+    height: 200px;
+}
+
+.panel_tabla{
+	position: absolute;
+	top: 10%;
+	left: 1%;
+	width: 95%;
+    width: auto;
+	height: auto;
+	z-index: 1;
+    background:transparent;
+}
+
+.panel_tabla input[type=img1]{
+	width: 10px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
+
+.panel1{
+	position: fixed;
+	top: calc(10%);
+	left: 5%;
+	width: 90%;
+    height: 80% ; 
+    margin: 10px; 
+	padding: 10px;
+	z-index: 2;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(188, 100, 191)), color-stop(100%,rgb(137, 97, 132)));
+}
+
+
+.panel_img1{
+	position: absolute;
+	top: calc(20%);
+	left: calc(8%);
+	width: 25%;
+    height: 72% ; 
+    margin: 10px; 
+	padding: 10px;
+	z-index: 2;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(238, 175, 240)), color-stop(100%,rgb(37, 10, 34)));
+}
+
+
+
+/*****************************************************************************************/
+/* CSS para estilos de form */
+
+.form1{
+	position: absolute;
+	top: calc(38%);
+	left: calc(45%);
+	height: 50%;
+	width: 50%;
+	padding: 10px;
+	z-index: 2;
+}
+
+.form1 input[type=text]{
+	width: 350px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
+
+.form1 input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.form1 input[type=button]{
+	width: 230px;
+	height: 32px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #9f1085;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+    margin-left: 68px;
+}
+
+.form1 input[type=button]:hover{
+	opacity: 0.8;
+}
+
+.form1 input[type=button]:active{
+	opacity: 0.6;
+}
+
+.form1 input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.form1 input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+.form1 input[type=button]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+
+.form1_labels{
+	position: absolute;
+	top: calc(40%);
+	left: calc(28%);
+	z-index: 2;
+}
+
+.form1_labels div{
+	float: left;
+	color: #ffffff;
+	font-family: 'Exo', sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+}
+
+
+.selecto{
+	width: 350px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	border-radius: 2px;
+	color: rgb(146, 11, 124);
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
