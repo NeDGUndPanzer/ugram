@@ -97,7 +97,7 @@ def registrarUsuario():
 
 @app.route('/update',methods = ['POST'])
 def updateUser():
-    if request.method == 'PUT':
+    if request.method == 'POST':
         username = request.json['username']
         usernameE = request.json['newuser']
         fullname = request.json['nombre']
@@ -169,8 +169,8 @@ def getuserAlbums():
             item = res['Items']
             datos = '{ "albumnes" : "'
             for x in item:
-                datos += x['albumName']+";"
-            datos = datos[0:len(datos)-1]+'" }'
+                datos += x['albumName']+"bokunopico"
+            datos = datos[0:len(datos)]+'" }'
             
             return json.loads(datos)
         except:      
@@ -200,7 +200,7 @@ def addFoto():
         username = request.json['username']
         albumname = request.json['albumname'] 
         fotoname = request.json['picname']
-        foto = request.json['foto']
+        foto = request.json['imgurl']
         try:
             fotostable.put_item(
             Item={
