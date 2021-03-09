@@ -181,7 +181,7 @@ def getuserAlbums():
 def addAlbum():
     if request.method == 'POST':
         username = request.json['username']
-        albumname = request.json['album'] 
+        albumname = request.json['albumname'] 
         try:
             albumtable.put_item(
             Item={
@@ -198,7 +198,7 @@ def addAlbum():
 def addFoto():
     if request.method == 'POST':
         username = request.json['username']
-        albumname = request.json['albumName'] 
+        albumname = request.json['albumname'] 
         fotoname = request.json['picname']
         foto = request.json['foto']
         try:
