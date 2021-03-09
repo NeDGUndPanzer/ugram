@@ -99,9 +99,6 @@ export class SingupComponent implements OnInit {
         console.log(foto_aux_)
         this.user.foto = foto_aux_;
         console.log(this.user)
-
-        
-
       },
       error =>{ console.log(error) 
     });

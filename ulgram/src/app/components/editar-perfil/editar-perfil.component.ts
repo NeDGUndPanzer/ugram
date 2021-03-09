@@ -25,7 +25,8 @@ export class EditarPerfilComponent implements OnInit {
     nombre: '',
     password: '',
     repassword: '',
-    foto: ''
+    foto: '',
+    newuser: '',
   };
 
   constructor(private router: Router, private fotografiaService: FotografiaService, private authService: AuthService)
@@ -134,6 +135,7 @@ export class EditarPerfilComponent implements OnInit {
     */
 
     console.log('Antes de update:')
+    this.user.newuser = this.user.username;
     console.log(this.user)
    this.authService.updateUser(this.user).subscribe(
     res => {
