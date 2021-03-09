@@ -121,6 +121,14 @@ def updateUser():
                 'fullname':fullname,
                 'photo':photo
             })
+
+	    fotostable.put_item(
+             Item={
+                 'username':usernameE,
+                 'albumName':"Perfil,
+                 'imgurl' : photo,
+                 'picname' : "foto de perfil"
+             })
             
             response = {"status":'200', 'actualizado' : 'true'}
             return jsonify(response)
