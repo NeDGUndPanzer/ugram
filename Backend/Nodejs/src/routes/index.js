@@ -75,7 +75,7 @@ router.post('/upload_editprofile', function (req, res) {
     ACL: 'public-read'
   };
   const putResult = s3.putObject(params).promise();
-  res.json({ mensaje: putResult })
+  res.json({ idfoto: id })
 
 });
 
@@ -297,7 +297,7 @@ router.post('/update', function (req, res) {
   ddb.putItem({
     TableName: "User",
     Item: {
-      "username": { S: req.body.username },
+      "username": { S: req.body.newuser },
       "password": { S: md5(req.body.password) },
       "fullname": { S: req.body.nombre },
       "photo": { S: req.body.foto }
