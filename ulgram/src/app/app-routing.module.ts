@@ -9,6 +9,7 @@ import { UploadComponent } from './components/upload/upload.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'singup', component: SingupComponent},
   {path: 'editarperfil', component: EditarPerfilComponent},

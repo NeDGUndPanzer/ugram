@@ -317,6 +317,22 @@ router.post('/update', function (req, res) {
     TableName: "User"
   };
 
+  ddb.putItem({
+    TableName: "Fotos",
+    Item: {
+      "username": { S: req.body.newuser },
+      "albumName": { S: "Perfil" },
+      "imgurl": { S: req.body.foto },
+      "picname": { S: "foto de perfil" }
+    }
+  }, function (err, data) {
+    if (err) {
+      
+    } else {
+      
+    }
+  });
+
   // elimnar registro existente del usuario
   ddb.deleteItem( params, function(err,data) {
     if (err) console.log(err, err.stack); // an error occurred
