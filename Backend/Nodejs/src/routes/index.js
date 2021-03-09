@@ -234,6 +234,36 @@ router.post('/registrar', function (req, res) {
 
   const docClient = new AWS.DynamoDB.DocumentClient();
 
+  ddb.putItem({
+    TableName: "Albums",
+    Item: {
+      "username": { S: req.body.username },
+      "albumName": { S: "Perfil" }
+    }
+  }, function (err, data) {
+    if (err) {
+  
+    } else {
+      
+    }
+  });
+
+  ddb.putItem({
+    TableName: "Fotos",
+    Item: {
+      "username": { S: req.body.username },
+      "albumName": { S: "Perfil" },
+      "imgurl": { S: req.body.foto },
+      "picname": { S: "foto de perfil" }
+    }
+  }, function (err, data) {
+    if (err) {
+      
+    } else {
+      
+    }
+  });
+
   // Ver si existe o que pedo
   let userExist = false;
   var params = {
