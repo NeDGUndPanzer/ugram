@@ -54,7 +54,7 @@ def registrarUsuario():
         username = request.json['username']
         passwd = request.json['password']
         encripted = hashlib.md5(passwd.encode())
-        fullname = request.json['fullname']
+        fullname = request.json['nombre']
         photo = request.json['foto']
 
         try:
@@ -100,8 +100,8 @@ def updateUser():
     if request.method == 'PUT':
         username = request.json['username']
         usernameE = request.json['newuser']
-        fullname = request.json['fullname']
-        photo = request.json['photo']
+        fullname = request.json['nombre']
+        photo = request.json['foto']
 
         try:
             res = userstable.get_item(
@@ -311,15 +311,15 @@ def getuserfotos():
             return jsonify(response)
 def subirImagen(photo):
     imagen = base64.b64decode(photo)
-    nombre = 'Fotos_Publicadas/' + str(uuid.uuid4()) + '.jpg'
-    s3.Bucket('practica1-g21-imagenes').put_object(Key=nombre,Body=imagen, ContentType="image", ACL='public-read')
-    return nombre
+    nombre =  str(uuid.uuid4())
+    s3.Bucket('practica1-g21-imagenes').put_object(Key='Fotos_Publicadas/' +nombre + '.jpg',Body=imagen, ContentType="image", ACL='public-read')
+    return jsonify( {"idfoto" : nombre})
 
 def subirImagenPerfil(photo):
     imagen = base64.b64decode(photo)
-    nombre = 'Fotos_Perfil/' + str(uuid.uuid4()) + '.jpg'
-    s3.Bucket('practica1-g21-imagenes').put_object(Key=nombre,Body=imagen, ContentType="image", ACL='public-read')
-    return nombre
+    nombre = str(uuid.uuid4()) 
+    s3.Bucket('practica1-g21-imagenes').put_object(Key='Fotos_Perfil/' + nombre+ '.jpg',Body=imagen, ContentType="image", ACL='public-read')
+    return jsonify( {"idfoto" : nombre})
 
 def borrarFoto(llave):
     try:
@@ -331,4 +331,4 @@ def borrarFoto(llave):
         return
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
