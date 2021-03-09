@@ -10,7 +10,7 @@ import uuid
 app = Flask(__name__)
 
 s3 = boto3.resource('s3',region_name='us-east-2',aws_access_key_id='AKIAQGEZTINBG6FXCMHG',aws_secret_access_key='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')
-db = boto3.resource('dynamodb',region_name='us-east-2',aws_access_key_id='AKIAVEMKH4ZBE4Q67N43',aws_secret_access_key='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')
+db = boto3.resource('dynamodb',region_name='us-east-2',aws_access_key_id='AKIAVEMKH4ZBHWPR4M7A',aws_secret_access_key='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')
 urlbucket = 'https://practica1-g21-imagenes.s3.us-east-2.amazonaws.com/'
 
 userstable = db.Table('User')
