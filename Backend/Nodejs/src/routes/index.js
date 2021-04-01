@@ -18,7 +18,7 @@ const aws_keys = require('./creds');
 
 const s3 = new AWS.S3(aws_keys.s3);
 const ddb = new AWS.DynamoDB(aws_keys.dynamodb);
-//const rek = new AWS.Rekognition(aws_keys.rekognition);
+const rek = new AWS.Rekognition(aws_keys.rekognition);
 
 router.get('/hola', 
     (req,res) => res.json
@@ -530,5 +530,40 @@ router.post('/obtenerfoto_solos3', function (req, res) {
 });
 //-------------------------------------------------- FIN AREA DE PRUEBAS
   
+
+//********************************************************************** */
+/*
+      _    _                                   _           
+    | |  | |                                 | |          
+    | |  | | __ _ _ __ __ _ _ __ ___    _ __ | |_   _ ___ 
+   | |  | |/ _` | '__/ _` | '_ ` _ \  | '_ \| | | | / __|
+  | |__| | (_| | | | (_| | | | | | | | |_) | | |_| \__ \
+  \____/ \__, |_|  \__,_|_| |_| |_| | .__/|_|\__,_|___/
+          __/ |                     | |                
+         |___/                      |_|                
+*/
+//********************************************************************** */
+
+//********************************************************************** */
+// METODO: getLabels
+// DESCRIPCION: no se
+// ESTADO: no done
+router.post('/getLabels', async (req, res) => {
+
+  var imagen = req.body.imagen;
+  var params = {
+    Image: { 
+      Bytes: Buffer.from(imagen, 'base64')
+    }, 
+    MaxLabels: 123
+  };
+  rek.detectLabels(params, function(err, data) {
+    if (err) {res.json({mensaje: "Error"})} 
+    else {   
+           res.json({etiquetas: data.Labels});      
+    }
+  });
+
+});
 
 module.exports = router;

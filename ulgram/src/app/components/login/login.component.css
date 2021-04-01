@@ -22,6 +22,18 @@ body{
 	z-index: 0;
 }
 
+#app {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 2px;
+}
+#video {
+    background-color: #380529;
+}
+#canvas {
+    display: none;
+}
+
 .grad{
 	position: absolute;
 	top: -20px;

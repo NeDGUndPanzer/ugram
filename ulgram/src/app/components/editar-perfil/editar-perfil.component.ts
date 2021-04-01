@@ -103,6 +103,12 @@ export class EditarPerfilComponent implements OnInit {
 
   /* SOPORTE PARA CREACION DE USUARIOS */
   
+  picfoto: any = {
+    username: '',
+    albumname: '',
+    imgurl: '',
+    picname:''
+  }; 
   editar()
   {
     this.user.foto = this.cardImageBase64;
@@ -125,6 +131,7 @@ export class EditarPerfilComponent implements OnInit {
        foto_aux_ = foto_aux_ + foto_aux.idfoto + '.jpg';
        console.log(foto_aux_)
        this.user.foto = foto_aux_;
+       this.picfoto.imgurl = foto_aux_;
        console.log(this.user)
      },
      error =>{ console.log(error) 
@@ -133,6 +140,16 @@ export class EditarPerfilComponent implements OnInit {
     /*****************************************************
      * modificar
     */
+
+    this.picfoto.picname = 'foto de perfil';
+    this.picfoto.albumname = 'Perfil';
+     this.picfoto.username = this.user.username;
+     this.fotografiaService.service_addFoto(this.picfoto).subscribe(
+      res => {
+        console.log(res)
+      },
+      error =>{ console.log(error) 
+    });
 
     console.log('Antes de update:')
     this.user.newuser = this.user.username;

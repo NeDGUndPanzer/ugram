@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { FotografiaService } from '../../services/fotografia.service';
@@ -11,6 +11,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  @ViewChild("video")
+  public video: any ;
+
+  @ViewChild("canvas")
+  public canvas: any;
+
+  public captures: Array<any>;
+
   // ulgramgif.gif
   user: any = {
     username: '',
@@ -19,7 +27,9 @@ export class LoginComponent implements OnInit {
     foto: ''
   };
   
-  constructor(private router: Router, private fotografiaService: FotografiaService, private authService: AuthService)  { }
+  constructor(private router: Router, private fotografiaService: FotografiaService, private authService: AuthService)  {
+    this.captures = [];
+   }
 
   ngOnInit(): void {
   }
@@ -42,5 +52,19 @@ export class LoginComponent implements OnInit {
    this.router.navigate(['/singup']);
  }
 
+ public ngAfterViewInit() {
+  if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+          this.video.nativeElement.src = window.URL.createObjectURL(stream);
+          this.video.nativeElement.play();
+      });
+  }
+}
+
+public capture() {
+  var context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 640, 480);
+  this.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
+  console.log(this.canvas.nativeElement.toDataURL("image/png"))
+}
 
 }

@@ -5,15 +5,32 @@
 </div>
 <br>
 <div class="img1">
-    <img src="../../../assets/img/selfie.jpeg" alt="selfie">
+    <div id="app">
+        <div><video #video id="video" width="400" height="340" autoplay></video></div>
+        <div><button id="snap" (click)="capture()">Snap Photo</button></div>
+        <canvas #canvas id="canvas" width="200" height="200"></canvas>
+        <ul>
+            <li *ngFor="let c of captures">
+                <img src="{{ c }}" height="50" />
+            </li>
+        </ul>
+    </div>
 </div>
 <div class="login">
         <input type="text" placeholder="  usuario" name="user" [(ngModel)]="user.username"><br>
         <input type="password" placeholder="  password" name="password" [(ngModel)]="user.password"><br>
         <input type="button" value="Ingresar" (click) = "logear()">
         <input type="button" value="No tienes cuenta?" (click) = "goto_singup()">
+        <br><br>       
+
 </div>
 
+<!-- CODIGO PLUS -->
+
+
+
+<!-- ------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------ -->
 
 <!-- HTML para navbar -->
 <div class="nav1">
