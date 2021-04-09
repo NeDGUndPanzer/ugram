@@ -397,8 +397,6 @@ router.post('/getuseralbums', async (req, res) => {
   });
 
 });
-
-
 //get imagen
 
 router.post('/getimageinfo', async (req, res) => {
