@@ -19,6 +19,7 @@ const aws_keys = require('./creds');
 const s3 = new AWS.S3(aws_keys.s3);
 const ddb = new AWS.DynamoDB(aws_keys.dynamodb);
 const rek = new AWS.Rekognition(aws_keys.rekognition);
+const awstranslate = new AWS.Translate(aws_keys.translate);
 
 router.get('/hola', 
     (req,res) => res.json
@@ -564,6 +565,28 @@ router.post('/getLabels', async (req, res) => {
     }
   });
 
+});
+
+//Translates text from the received json and return the translated text
+
+router.post('/traducir', (req, res) => {
+  let description = req.body.description
+  let toleng = req.body.toleng
+
+  let params = {
+    SourceLanguageCode: 'auto',
+    TargetLanguageCode: toleng,
+    Text: description || 'Error al traducir'
+  };
+  awstranslate.translateText(params, function (err, data) {
+    if (err) {
+      console.log(err, err.stack);
+      res.send({ error: err })
+    } else {
+      console.log(data);
+      res.send({ translated: data })
+    }
+  });
 });
 
 module.exports = router;
