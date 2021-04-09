@@ -11,13 +11,10 @@ import { PaginaInicioComponent } from './components/pagina-inicio/pagina-inicio.
 import { EditaralbumComponent } from './components/editaralbum/editaralbum.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
-<<<<<<< HEAD
 
 import {WebcamModule} from 'ngx-webcam';
 
-=======
 import { SeePhotoComponent } from './components/see-photo/see-photo.component';
->>>>>>> feature/vistaNueva
 @NgModule({
   declarations: [
     AppComponent,

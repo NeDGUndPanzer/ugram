@@ -22,6 +22,7 @@ export class SeePhotoComponent implements OnInit {
   album = "";
   desc = "";
   nombre = "";
+  toleng = "es";
 
   constructor(private activateRoute: ActivatedRoute,private router: Router, private fotografiaService: FotografiaService, private authService: AuthService) { }
 
@@ -40,7 +41,7 @@ export class SeePhotoComponent implements OnInit {
           this.album = response.album;
           this.nombre = response.nombre;
           this.desc = response.descripcion;
-          
+
         }, error =>{
           console.log(error);
         });
@@ -65,6 +66,20 @@ export class SeePhotoComponent implements OnInit {
     });
   }
 
+  traducir(){
+    this.fotografiaService.getTranslate({description: this.desc, toleng:this.toleng}).subscribe(
+      res =>{
+        let resp:any = res;
+        this.desc = resp.translated.TranslatedText;
+      }, error=>{
+        alert("Error al intentar traducir la descripcion");
+        console.log(error);
+      });
+  }
+
+  prueba(){
+    console.log(this.toleng);
+  }
    /**
   * GOTOs
   */

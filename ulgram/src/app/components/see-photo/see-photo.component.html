@@ -18,4 +18,14 @@
         <h4>Descripcion: </h4>
         <h5>{{this.desc}}</h5>
     </div>
+    <div>
+        <h5>Traducir a: </h5>
+        <select class="form-control" id="diaR" [(ngModel)]="toleng" name="dia">
+            <option value="en">Inglés</option>
+            <option value="es">Español</option>
+            <option value="fr">Frances</option>
+            <option value="ja">Japonés</option>
+        </select>
+        <button class="boton"(click)="traducir();">Traducir</button>
+    </div>
 </div>

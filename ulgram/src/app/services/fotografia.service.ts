@@ -65,9 +65,13 @@ export class FotografiaService {
   {
     return this.http.post(ip + 'getLabels', foto_data);  
   }
-  
+
   getImageInfo(idfoto:any){
     return this.http.post(ip + 'getimageinfo', idfoto);
+  }
+
+  getTranslate(params:any){
+    return this.http.post(ip + "traducir",params);
   }
 
 }
