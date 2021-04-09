@@ -398,6 +398,39 @@ router.post('/getuseralbums', async (req, res) => {
 
 });
 
+
+//get imagen
+
+router.post('/getimageinfo', async (req, res) => {
+  var params = {
+
+    ExpressionAttributeValues: {
+      ":v1": {
+        S: req.body.url
+       }
+     },
+    KeyConditionExpression: "imgurl = :v1",
+    TableName: "Fotos"
+  };
+  ddb.query(params, async (err, data) => {
+    if (err){
+      console.log(err, err.stack); 
+    }
+    else{    
+      let datos;
+      data.Items.forEach(element => {
+        try {
+          datos = {imgurl: element.imgurl.S, album: element.albumName.S, nombre: element.picname.S, usuario:element.username.S, descripcion : element.descripcion.S}
+        } catch (error) {
+          datos = {imgurl: element.imgurl.S, album: element.albumName.S, nombre: element.picname.S, usuario:element.username.S, descripcion : "Sin descripcion"}
+        }
+      });
+      res.send(datos);
+    }             
+  });
+
+});
+
 //********************************************************************** */
 // METODO: addAlbum
 // DESCRIPCION: no se

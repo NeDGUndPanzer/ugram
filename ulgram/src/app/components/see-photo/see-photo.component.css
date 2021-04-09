@@ -1,0 +1,19 @@
+.imagen{
+    position: relative;
+    display: inline-block;
+    box-shadow: 2px 2px 4px #bbb;
+    border-top-right-radius: 4px;
+    width: 500px;
+    height: 500px;
+    vertical-align: bottom;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedor{
+    margin-top: 150px;
+    margin-left: 30%;
+    text-align: center;
+    width: 40%;
+}

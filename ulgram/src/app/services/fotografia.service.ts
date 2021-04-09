@@ -49,5 +49,8 @@ export class FotografiaService {
     return this.http.post(ip + 'getFotosAlbum', foto_data);  
   }
   
+  getImageInfo(idfoto:any){
+    return this.http.post(ip + 'getimageinfo', idfoto);
+  }
 
 }

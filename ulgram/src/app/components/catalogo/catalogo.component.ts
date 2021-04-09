@@ -75,6 +75,7 @@ export class CatalogoComponent implements OnInit {
 
     /* 02. obtener todos los albumnes a partir del username */
     console.log("albunes -> " + this.albunes);
+    console.log(this.albunes);
 
     /* 03. recorrer los almbunes haceidno match con el username */
     for (let i = 0; i < this.albunes.length; i++) 
@@ -91,7 +92,8 @@ export class CatalogoComponent implements OnInit {
             for (let index = 0; index < cadenaux.length; index++) {
               const element = cadenaux[index];
               miarray.push(element);
-              let foto:any = { album:  albumaux, foto: element};
+            
+              let foto:any = { album:  albumaux, foto: element, id: "idf"+element};
               this.catalogo.push(foto);
             }
             this.catalogo.pop();
@@ -100,7 +102,8 @@ export class CatalogoComponent implements OnInit {
       }); 
     }
 
-    console.log(this.catalogo)
+    console.log("el catalogo quedo como: ");
+    console.log(this.catalogo);
 
   }
 

@@ -8,6 +8,8 @@ body{
 	color: #fff;
 	font-family: Arial;
 	font-size: 12px;
+	align-items: center;
+	text-align: center;
 }
 
 .body{
@@ -205,4 +207,36 @@ body{
 	font-size: 16px;
 	font-weight: 400;
 	padding: 4px;
+}
+
+
+.cover-container {
+    height: auto;
+    width: 50%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+	margin-left: 25%;
+}
+.cover-item2 {
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.cover-item {
+    position: relative;
+    display: inline-block;
+    margin: 8px 8px;
+    box-shadow: 2px 2px 4px #bbb;
+    border-top-right-radius: 4px;
+    width: 250px;
+    height: 250px;
+    vertical-align: bottom;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

@@ -11,6 +11,7 @@ import { PaginaInicioComponent } from './components/pagina-inicio/pagina-inicio.
 import { EditaralbumComponent } from './components/editaralbum/editaralbum.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
+import { SeePhotoComponent } from './components/see-photo/see-photo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
     PaginaInicioComponent,
     EditaralbumComponent,
     UploadComponent,
-    CatalogoComponent
+    CatalogoComponent,
+    SeePhotoComponent
   ],
   imports: [
     BrowserModule,
