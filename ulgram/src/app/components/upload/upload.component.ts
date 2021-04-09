@@ -31,7 +31,8 @@ export class UploadComponent implements OnInit {
     nombre: '  nombre',
     password: 'password',
     repassword: 'repassword',
-    foto: ''
+    foto: '',
+    descripcion: ''
   };
 
   constructor(private router: Router, private fotografiaService: FotografiaService, private authService: AuthService) 
@@ -120,7 +121,8 @@ export class UploadComponent implements OnInit {
     username: '',
     albumname: '',
     imgurl: '',
-    picname:''
+    picname:'',
+    lalbumnes: []
   }; //mcalbum1
   subirFoto()
   {
@@ -150,6 +152,88 @@ export class UploadComponent implements OnInit {
         error =>{ console.log(error) 
       });
     }
+  }
+
+  subirFoto_plus()
+  {
+    let fotoaux = this.cardImageBase64;
+    let foto_ = fotoaux.replace("data:image/jpeg;base64,", "");
+    let fotografia = { foto: foto_ };
+    console.log(fotografia)
+    this.fotografiaService.service_upload_pic(fotografia).subscribe(
+      res => {
+        const foto_aux:any = res;
+        let foto_aux_:any = 'https://practica1-g21-imagenes.s3.us-east-2.amazonaws.com/Fotos_Publicadas/';
+        foto_aux_ = foto_aux_ + foto_aux.idfoto + '.jpg';
+        this.picfoto.imgurl = foto_aux_;
+      },
+      error =>{ console.log(error) 
+    });
+    this.picfoto.username = this.user.username;
+    if(this.picfoto.imgurl == ''){
+
+    }
+    else{
+
+      /**
+       * obtener lables
+       */
+
+      let imgurl = {imagen:String( foto_ )};
+      this.fotografiaService.service_getLabels(imgurl).subscribe(
+        res => {
+          console.log(res);
+          let respuesta:any = res;
+          console.log(respuesta.etiquetas.length);
+          for (let index = 0; index < respuesta.etiquetas.length; index++) {
+            const element = respuesta.etiquetas[index];
+            console.log(element.Name);
+            this.picfoto.lalbumnes.push(String(element.Name));
+            if(index == 4)
+            { 
+              console.log(this.picfoto.lalbumnes)
+              break; 
+            }
+          }
+          alert('Labels cargados');
+          this.subirFoto_plus_();
+        },
+        error =>{ console.log(error) 
+      });
+    }
+  }
+
+  subirFoto_plus_()
+  {
+    for (let index = 0; index < this.picfoto.lalbumnes.length; index++) {
+      const element = this.picfoto.lalbumnes[index];
+      let album_ = {username:String(this.user.username), albumname: String(element)};
+      this.fotografiaService.service_addAlbum(album_).subscribe(
+        res => {
+          console.log('album creado: ' + album_.albumname)
+          console.log(res)
+        },
+        error =>{ console.log(error) 
+      });
+    }
+    alert('Album implementados');
+    this.subirFoto_plus__();
+  }
+
+  subirFoto_plus__()
+  {
+    for (let index = 0; index < this.picfoto.lalbumnes.length; index++) {
+      const element = this.picfoto.lalbumnes[index];
+      this.picfoto.albumname = String(element)
+      this.fotografiaService.service_addFoto(this.picfoto).subscribe(
+        res => {
+          console.log('foto: ' + element)
+          console.log(res)
+        },
+        error =>{ console.log(error) 
+      });
+    }
+    alert('Imagen cargada');
   }
 
    /**

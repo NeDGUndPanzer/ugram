@@ -49,5 +49,21 @@ export class FotografiaService {
     return this.http.post(ip + 'getFotosAlbum', foto_data);  
   }
   
+  /** FAse 2 */
+
+  service_compararFotos(foto_data: any)
+  {
+    return this.http.post(ip + 'compararfotos', foto_data);  
+  }
+
+  service_getBASE64(foto_data: any)
+  {
+    return this.http.post(ip + 'getBASE64_byURL', foto_data);  
+  }
+
+  service_getLabels(foto_data: any)
+  {
+    return this.http.post(ip + 'getLabels', foto_data);  
+  }
 
 }

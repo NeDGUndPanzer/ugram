@@ -1,21 +1,20 @@
 <div class="body"></div>
 <div class="grad"></div>
+
 <div class="header">
     <div>Login</div>
 </div>
 <br>
 <div class="img1">
-    <div id="app">
-        <div><video #video id="video" width="400" height="340" autoplay></video></div>
-        <div><button id="snap" (click)="capture()">Snap Photo</button></div>
-        <canvas #canvas id="canvas" width="200" height="200"></canvas>
-        <ul>
-            <li *ngFor="let c of captures">
-                <img src="{{ c }}" height="50" />
-            </li>
-        </ul>
-    </div>
-</div>
+    <h1>Login con webcam</h1>
+    <b>Usuario:   </b><input type="text" placeholder="  usuario" name="user" [(ngModel)]="user.username"><br><br>
+    <h3>Toma una foto</h3>
+    <textarea name="comentarios" rows="9" cols="43" [(ngModel)]="user.fotocomparativa">Escribe aquí tus comentarios</textarea>
+    <button (click)="comparar()">Comparar</button>
+    <img [src]="user.foto" id='perfilfoto'>
+    <canvas id="canvas" style="overflow:auto"></canvas>
+    <br>
+</div> 
 <div class="login">
         <input type="text" placeholder="  usuario" name="user" [(ngModel)]="user.username"><br>
         <input type="password" placeholder="  password" name="password" [(ngModel)]="user.password"><br>

@@ -175,7 +175,7 @@ router.post('/iniciarSesion', async (req, res) => {
 // METODO: getuserdata
 // DESCRIPCION: aun no se
 router.post('/getuserdata', async (req, res) => {
-  console.log(req.body)
+  //console.log(req.body)
 
   var params = {
     Key: { "username": { S: req.body.username }
@@ -429,7 +429,8 @@ router.post('/addFoto', function (req, res) {
       "username": { S: req.body.username },
       "albumName": { S: req.body.albumname },
       "imgurl": { S: req.body.imgurl },
-      "picname": { S: req.body.picname }
+      "picname": { S: req.body.picname },
+      "descripcion": { S: req.body.descripcion }
     }
   }, function (err, data) {
     if (err) {
@@ -565,5 +566,66 @@ router.post('/getLabels', async (req, res) => {
   });
 
 });
+
+//********************************************************************** */
+// METODO: compararfotos
+// DESCRIPCION: no se
+// ESTADO: no done
+
+const imageToBase64 = require('image-to-base64');
+const imageToUri = require('image-to-uri');
+router.post('/getBASE64_byURL', function (req, res) { 
+  var imagen1 = String(req.body.imagen);
+  var base64 = "";
+  imageToBase64(imagen1) // Image URL
+    .then(
+        (response) => {
+            //console.log(response); // "iVBORw0KGgoAAAANSwCAIA..."
+            base64 = String(response)
+            res.json({base64: String(response)}); 
+        }
+    )
+    .catch(
+        (error) => {
+            console.log(error); // Logs an error if there was one
+        }
+    )
+  
+  
+});
+
+//********************************************************************** */
+// METODO: compararfotos
+// DESCRIPCION: no se
+// ESTADO: no done
+router.post('/compararfotos', function (req, res) { 
+  var imagen1 = String(req.body.imagen1);
+  var imagen2 = String(req.body.imagen2);
+  /**console.log("imagen1")
+  console.log(imagen1)
+  console.log("imagen2")
+  console.log(imagen2)**/
+
+  var params = {
+    
+    SourceImage: {
+        Bytes: Buffer.from(imagen1, 'base64')     
+    }, 
+    TargetImage: {
+        Bytes: Buffer.from(imagen2, 'base64')    
+    },
+    SimilarityThreshold: '80'
+    
+   
+  };
+  rek.compareFaces(params, function(err, data) {
+    if (err) {res.json({mensaje: err})} 
+    else {   
+           res.json({Comparacion: data.FaceMatches});      
+    }
+  });
+});
+
+
 
 module.exports = router;

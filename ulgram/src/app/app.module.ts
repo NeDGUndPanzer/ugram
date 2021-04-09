@@ -11,6 +11,9 @@ import { PaginaInicioComponent } from './components/pagina-inicio/pagina-inicio.
 import { EditaralbumComponent } from './components/editaralbum/editaralbum.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
+
+import {WebcamModule} from 'ngx-webcam';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,8 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    WebcamModule
   ],
   providers: [],
   bootstrap: [AppComponent]

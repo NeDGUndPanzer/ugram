@@ -19,7 +19,8 @@ export class PaginaInicioComponent implements OnInit {
     nombre: '',
     password: '',
     repassword: '',
-    foto: ''
+    foto: '',
+    labels: ''
   };
 
   theuser:any;
@@ -40,6 +41,7 @@ export class PaginaInicioComponent implements OnInit {
     });*/
 
     this.getSesionVariables();
+    this.obtenerFotoPerfil();
   }
 
   ngOnInit(): void {
@@ -93,6 +95,59 @@ export class PaginaInicioComponent implements OnInit {
  goto_upload()
  {
    this.router.navigate(['/upload']);
+ }
+
+ /* SEGNDA FASE */
+
+ obtenerFotoPerfil()
+  {
+    this.authService.getuserData(this.user).subscribe(
+      res => {
+        //console.log(res);
+        let respuesta:any = res;
+        this.user.foto = respuesta.foto;
+        this.user.nombre = respuesta.name;
+        this.getFotoPerfilLabels();
+      },
+      error =>{ console.log(error) 
+    });
+  }
+
+ getFotoPerfilLabels()
+ {
+    let imgurl = {imagen:String(this.user.foto)};
+    let img1 = "";
+    this.fotografiaService.service_getBASE64(imgurl).subscribe(
+      res => {
+        console.log(res);
+        let respuesta:any = res;
+        this.user.fotoperfil64 = respuesta.base64;
+        this.getFotoPerfilLabels_();
+      },
+      error =>{ console.log(error) 
+    });
+ }
+
+ getFotoPerfilLabels_()
+ {
+  //service_getLabels
+  let imgurl = {imagen:String( this.user.fotoperfil64 )};
+  this.fotografiaService.service_getLabels(imgurl).subscribe(
+    res => {
+      console.log(res);
+      let respuesta:any = res;
+      console.log(respuesta.etiquetas.length);
+      this.user.labels = 'Etiquetas:';
+      for (let index = 0; index < respuesta.etiquetas.length; index++) {
+        const element = respuesta.etiquetas[index];
+        console.log(element.Name);
+        this.user.labels = this.user.labels + "\n" + "[" + String(index + 1) + "]" + String(element.Name);
+        if(index == 4){ break; }
+      }
+      
+    },
+    error =>{ console.log(error) 
+  });
  }
 
 }
