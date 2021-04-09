@@ -66,4 +66,10 @@ export class FotografiaService {
     return this.http.post(ip + 'getLabels', foto_data);  
   }
 
+  //detectartexto
+  service_detectartexto(foto_data: any)
+  {
+    return this.http.post(ip + 'detectartexto', foto_data);  
+  }
+
 }

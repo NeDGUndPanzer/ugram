@@ -13,6 +13,7 @@ import { UploadComponent } from './components/upload/upload.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
 import {WebcamModule} from 'ngx-webcam';
+import { TextoComponent } from './components/texto/texto.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {WebcamModule} from 'ngx-webcam';
     PaginaInicioComponent,
     EditaralbumComponent,
     UploadComponent,
-    CatalogoComponent
+    CatalogoComponent,
+    TextoComponent
   ],
   imports: [
     BrowserModule,

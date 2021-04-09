@@ -568,7 +568,6 @@ router.post('/getLabels', async (req, res) => {
 
 });
 
-<<<<<<< HEAD
 //********************************************************************** */
 // METODO: compararfotos
 // DESCRIPCION: no se
@@ -623,8 +622,11 @@ router.post('/compararfotos', function (req, res) {
   rek.compareFaces(params, function(err, data) {
     if (err) {res.json({mensaje: err})} 
     else {   
-           res.json({Comparacion: data.FaceMatches});      
-=======
+           res.json({Comparacion: data.FaceMatches});
+      }
+    });  
+  });
+
 //Translates text from the received json and return the translated text
 
 router.post('/traducir', (req, res) => {
@@ -643,14 +645,31 @@ router.post('/traducir', (req, res) => {
     } else {
       console.log(data);
       res.send({ translated: data })
->>>>>>> a63a01b9be96db9b5976310a6fa941fbbe40ea14
     }
   });
 });
 
-<<<<<<< HEAD
+
+// Analizar texto
+router.post('/detectartexto', function (req, res) { 
+  var imagen = req.body.foto;
+  var params = {
+    /* S3Object: {
+      Bucket: "mybucket", 
+      Name: "mysourceimage"
+    }*/
+    Image: { 
+      Bytes: Buffer.from(imagen, 'base64')
+    }
+  };
+  rek.detectText(params, function(err, data) {
+    if (err) {res.json({mensaje: "Error"})} 
+    else {   
+           res.json({texto: data.TextDetections});      
+    }
+  });
+});
 
 
-=======
->>>>>>> a63a01b9be96db9b5976310a6fa941fbbe40ea14
+
 module.exports = router;

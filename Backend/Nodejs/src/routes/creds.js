@@ -1,16 +1,16 @@
 let aws_keys = {
     s3: {
-        region: '',
+        region: 'us-east-2',
         accessKeyId: "",
         secretAccessKey: "",
     },
     dynamodb: {
-        region: '',
+        region: 'us-east-2',
         accessKeyId: "",
         secretAccessKey: ""
     },
     rekognition: {
-        region: '',
+        region: 'us-east-2',
         accessKeyId: "",
         secretAccessKey: "" 
     },
