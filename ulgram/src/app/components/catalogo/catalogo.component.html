@@ -10,22 +10,28 @@
 <img class="imgperfil" [src]="user.foto" (click)="goto_paginainicio()">
 <!-- ------------------------------------------------------------------ -->
 
-<br><br><br><br>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Album</th>
-            <th scope="col">foto</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of this.catalogo">
+<br><br><br><br>    
+      <!--  <tr *ngFor="let item of this.catalogo">
             <td> {{item.album}} </td>
             <td align="center">  
                 <div>
                     <img class="gato" src="{{item.foto}}" />
                 </div>
             </td>
-        </tr>
-    </tbody>
-</table>
+        </tr> -->
+        <div class="row-fluid">
+            <div class="col-lg-12 col-md-10 ">
+                <div class="cover-container" *ngFor="let item2 of this.albunes">         
+                        <h5>{{item2}}</h5>                                
+                        <div class="cover-item2" *ngFor="let item of this.catalogo" >
+                            <div class="cover-item" *ngIf="item2==item.album" style="background-image: url('{{item.foto}}')"> 
+                            <a [routerLink]="['/imagen',item.id]" class="btn btn-primary">Ver</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        <div>
+
+
+
+

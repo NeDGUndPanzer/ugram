@@ -397,6 +397,37 @@ router.post('/getuseralbums', async (req, res) => {
   });
 
 });
+//get imagen
+
+router.post('/getimageinfo', async (req, res) => {
+  var params = {
+
+    ExpressionAttributeValues: {
+      ":v1": {
+        S: req.body.url
+       }
+     },
+    KeyConditionExpression: "imgurl = :v1",
+    TableName: "Fotos"
+  };
+  ddb.query(params, async (err, data) => {
+    if (err){
+      console.log(err, err.stack); 
+    }
+    else{    
+      let datos;
+      data.Items.forEach(element => {
+        try {
+          datos = {imgurl: element.imgurl.S, album: element.albumName.S, nombre: element.picname.S, usuario:element.username.S, descripcion : element.descripcion.S}
+        } catch (error) {
+          datos = {imgurl: element.imgurl.S, album: element.albumName.S, nombre: element.picname.S, usuario:element.username.S, descripcion : "Sin descripcion"}
+        }
+      });
+      res.send(datos);
+    }             
+  });
+
+});
 
 //********************************************************************** */
 // METODO: addAlbum
@@ -568,7 +599,6 @@ router.post('/getLabels', async (req, res) => {
 
 });
 
-<<<<<<< HEAD
 //********************************************************************** */
 // METODO: compararfotos
 // DESCRIPCION: no se
@@ -624,8 +654,10 @@ router.post('/compararfotos', function (req, res) {
     if (err) {res.json({mensaje: err})} 
     else {   
            res.json({Comparacion: data.FaceMatches});      
-=======
-//Translates text from the received json and return the translated text
+    }
+  });
+});
+
 
 router.post('/traducir', (req, res) => {
   let description = req.body.description
@@ -643,14 +675,8 @@ router.post('/traducir', (req, res) => {
     } else {
       console.log(data);
       res.send({ translated: data })
->>>>>>> a63a01b9be96db9b5976310a6fa941fbbe40ea14
     }
   });
 });
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> a63a01b9be96db9b5976310a6fa941fbbe40ea14
 module.exports = router;

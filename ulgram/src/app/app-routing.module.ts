@@ -7,6 +7,7 @@ import { PaginaInicioComponent } from './components/pagina-inicio/pagina-inicio.
 import { EditaralbumComponent } from './components/editaralbum/editaralbum.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
+import { SeePhotoComponent } from './components/see-photo/see-photo.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'inicio', component: PaginaInicioComponent},
   {path: 'editaralbum', component: EditaralbumComponent},
   {path: 'upload', component: UploadComponent},
-  {path: 'catologo', component: CatalogoComponent}
+  {path: 'catologo', component: CatalogoComponent},
+  {path: 'imagen/:codigo', component: SeePhotoComponent}
 ];
 
 @NgModule({
