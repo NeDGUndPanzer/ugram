@@ -1,24 +1,23 @@
-
 let aws_keys = {
     s3: {
-        region: 'us-east-2',
-        accessKeyId: "",
-        secretAccessKey: "",
-    },
-    dynamodb: {
-        region: 'us-east-2',
-        accessKeyId: "",
-        secretAccessKey: ""
-    },
-    rekognition: {
-        region: 'us-east-2',
-        accessKeyId: "",
-        secretAccessKey: "" 
-    },
-    translate: {
-        region: '',
-        accessKeyId: "",
-        secretAccessKey: "" 
+            region: '',
+            accessKeyId: "",
+            secretAccessKey: "",
+        },
+        dynamodb: {
+            region: '',
+            accessKeyId: "",
+            secretAccessKey: ""
+        },
+        rekognition: {
+            region: '',
+            accessKeyId: "",
+            secretAccessKey: "" 
+        },
+        translate: {
+            region: '',
+            accessKeyId: "",
+            secretAccessKey: "" 
+        }
     }
-}
     module.exports = aws_keys
