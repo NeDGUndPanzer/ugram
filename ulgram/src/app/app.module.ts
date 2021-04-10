@@ -26,11 +26,8 @@ import { SeePhotoComponent } from './components/see-photo/see-photo.component';
     EditaralbumComponent,
     UploadComponent,
     CatalogoComponent,
-<<<<<<< HEAD
-    SeePhotoComponent
-=======
+    SeePhotoComponent,
     TextoComponent
->>>>>>> 0c2871be7788dc4e44320a36fc5035c0cb16f9de
   ],
   imports: [
     BrowserModule,
