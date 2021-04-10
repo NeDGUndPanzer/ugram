@@ -13,6 +13,7 @@ import { UploadComponent } from './components/upload/upload.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
 import {WebcamModule} from 'ngx-webcam';
+import { TextoComponent } from './components/texto/texto.component';
 
 import { SeePhotoComponent } from './components/see-photo/see-photo.component';
 @NgModule({
@@ -25,7 +26,11 @@ import { SeePhotoComponent } from './components/see-photo/see-photo.component';
     EditaralbumComponent,
     UploadComponent,
     CatalogoComponent,
+<<<<<<< HEAD
     SeePhotoComponent
+=======
+    TextoComponent
+>>>>>>> 0c2871be7788dc4e44320a36fc5035c0cb16f9de
   ],
   imports: [
     BrowserModule,

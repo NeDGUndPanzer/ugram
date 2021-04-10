@@ -1,0 +1,29 @@
+<!-- HTML para navbar -->
+<div class="nav1">
+    <img type="logo" src="../../../assets/img/logo1.JPG" alt="selfie">
+    <input type="button" value="Pagina inicial" (click)="goto_paginainicio()">
+    <input type="button" value="Control perfil" (click)="goto_editarperfil()">
+    <input type="button" value="Catalogo" (click)="goto_Catalogo()"> 
+    <input type="button" value="Manejo de album" (click)="goto_editaralbum()"> 
+    <input type="button" value="Subir foto" (click)="goto_upload()"> 
+</div>
+<img class="imgperfil" [src]="user.foto" (click)="goto_paginainicio()">
+<!-- ------------------------------------------------------------------ -->
+<div class="body"></div>
+<div class="grad"></div>
+
+<div class="img1">
+    <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+    <br>
+    <img class="imginside" [src]="this.cardImageBase64" />
+</div>
+
+<div class="form1"> 
+    <textarea [(ngModel)]="user.texto" rows="10" cols="35"></textarea>
+    <button (click)="subirFoto()">Analizar foto</button>
+</div>
+
+<div class="form2">
+    <div>Texto</div>
+
+</div>

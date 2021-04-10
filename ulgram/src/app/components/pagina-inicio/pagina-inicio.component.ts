@@ -97,6 +97,11 @@ export class PaginaInicioComponent implements OnInit {
    this.router.navigate(['/upload']);
  }
 
+ goto_texto()
+ {
+   this.router.navigate(['/texto']);
+ }
+
  /* SEGNDA FASE */
 
  obtenerFotoPerfil()

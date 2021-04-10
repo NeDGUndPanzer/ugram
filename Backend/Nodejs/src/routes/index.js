@@ -653,11 +653,12 @@ router.post('/compararfotos', function (req, res) {
   rek.compareFaces(params, function(err, data) {
     if (err) {res.json({mensaje: err})} 
     else {   
-           res.json({Comparacion: data.FaceMatches});      
-    }
+           res.json({Comparacion: data.FaceMatches});
+      }
+    });  
   });
-});
 
+//Translates text from the received json and return the translated text
 
 router.post('/traducir', (req, res) => {
   let description = req.body.description
@@ -678,5 +679,28 @@ router.post('/traducir', (req, res) => {
     }
   });
 });
+
+
+// Analizar texto
+router.post('/detectartexto', function (req, res) { 
+  var imagen = req.body.foto;
+  var params = {
+    /* S3Object: {
+      Bucket: "mybucket", 
+      Name: "mysourceimage"
+    }*/
+    Image: { 
+      Bytes: Buffer.from(imagen, 'base64')
+    }
+  };
+  rek.detectText(params, function(err, data) {
+    if (err) {res.json({mensaje: "Error"})} 
+    else {   
+           res.json({texto: data.TextDetections});      
+    }
+  });
+});
+
+
 
 module.exports = router;

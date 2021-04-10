@@ -73,5 +73,10 @@ export class FotografiaService {
   getTranslate(params:any){
     return this.http.post(ip + "traducir",params);
   }
+  //detectartexto
+  service_detectartexto(foto_data: any)
+  {
+    return this.http.post(ip + 'detectartexto', foto_data);  
+  }
 
 }
