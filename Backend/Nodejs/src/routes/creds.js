@@ -21,5 +21,4 @@ let aws_keys = {
             secretAccessKey: "" 
         }
     }
-    
     module.exports = aws_keys
